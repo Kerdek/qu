@@ -1,0 +1,3 @@
+[submodule "ted"]
+	path = ted
+	url = ../ted.git
