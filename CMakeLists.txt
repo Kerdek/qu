@@ -4,6 +4,17 @@ set(CMAKE_CXX_STANDARD 17)
 
 project (qu)
 
+find_package(Git)
+
+if(GIT_FOUND)
+  execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                  RESULT_VARIABLE GIT_SUBMOD_RESULT)
+  if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+      message(FATAL_ERROR "git submodule update failed. please checkout submodules")
+  endif()
+endif()
+
 add_subdirectory (ted)
 
 add_library (qu INTERFACE)
